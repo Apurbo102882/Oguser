@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VidSphere — Video Studio</title>
+<style>
+:root{--bg:#070b12;--panel:#0e1420;--panel2:#111a29;--line:#253247;--text:#edf2ff;--muted:#98a6bf;--accent:#6557ff;--accent2:#8c5bff;--danger:#ff5574}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#182347 0,transparent 55%),var(--bg);color:var(--text);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+button,input,textarea,select{font:inherit}button{cursor:pointer}.top{height:72px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:22px;padding:0 24px;position:sticky;top:0;background:#080d16ed;backdrop-filter:blur(16px);z-index:5}.brand{font-size:25px;font-weight:800;white-space:nowrap;letter-spacing:-.7px}.brand span{color:#9278ff}.search{max-width:600px;width:100%;margin:auto}.search input{width:100%;background:#151d2b;border:1px solid var(--line);border-radius:24px;color:var(--text);padding:12px 18px;outline:none}.top button,.primary{background:linear-gradient(120deg,var(--accent),var(--accent2));color:white;border:0;border-radius:12px;padding:11px 17px;font-weight:650}.layout{display:grid;grid-template-columns:210px minmax(0,1fr);max-width:1600px;margin:auto}.sidebar{padding:22px 14px;border-right:1px solid var(--line);min-height:calc(100vh - 72px)}.nav{display:block;width:100%;text-align:left;color:var(--muted);padding:12px 13px;margin:4px 0;background:transparent;border:0;border-radius:10px}.nav.active,.nav:hover{background:#242454;color:white}.side-label{color:#71809b;font-size:12px;text-transform:uppercase;letter-spacing:1.2px;margin:28px 12px 10px}.main{padding:24px;min-width:0}.welcome{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:20px}.welcome h1{font-size:25px;margin:0 0 4px}.muted{color:var(--muted)}.panel{background:linear-gradient(145deg,#111a29,#0b111b);border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:22px}.panel h2{font-size:18px;margin:0 0 16px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:7px}.field.full{grid-column:1/-1}.field label{font-size:13px;color:#bdc8dc}.field input,.field textarea,.field select{width:100%;background:#080e18;border:1px solid #2a3850;color:var(--text);border-radius:10px;padding:11px 12px;outline:none}.field textarea{resize:vertical;min-height:76px}.field input:focus,.field textarea:focus{border-color:#8073ff}.hint{font-size:12px;color:var(--muted)}.formactions{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:16px}.secondary,.ghost,.danger{border:1px solid var(--line);background:#131c2b;color:var(--text);border-radius:10px;padding:10px 14px}.danger{color:#ff9aac;border-color:#613142;background:#25121a}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:22px}.stat{background:#101827;border:1px solid var(--line);padding:16px;border-radius:14px}.stat strong{display:block;font-size:24px}.stat span{font-size:12px;color:var(--muted)}.sectionhead{display:flex;justify-content:space-between;align-items:center;margin:4px 0 14px}.sectionhead h2{font-size:19px;margin:0}.videos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.video-card{overflow:hidden;border:1px solid var(--line);border-radius:14px;background:#0e1521;min-width:0}.thumb{aspect-ratio:9/12;background:#111827;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}.thumb video{width:100%;height:100%;object-fit:cover}.placeholder{padding:18px;text-align:center;color:#8d9bb4}.placeholder b{font-size:38px;display:block;color:#8573ff}.video-info{padding:13px}.video-info h3{font-size:15px;margin:0 0 6px;overflow-wrap:anywhere}.description{font-size:12px;color:var(--muted);white-space:pre-wrap;overflow-wrap:anywhere;max-height:54px;overflow:hidden}.timestamp{font-size:11px;color:#b9b5ff;background:#242044;border-radius:6px;padding:4px 7px;display:inline-block;margin-top:9px}.meta{font-size:11px;color:var(--muted);margin-top:8px;overflow-wrap:anywhere}.cardactions{display:flex;gap:8px;margin-top:12px}.cardactions button{flex:1;font-size:12px;padding:8px 5px}.empty{border:1px dashed #35445d;border-radius:14px;padding:38px 20px;text-align:center;color:var(--muted);grid-column:1/-1}.empty b{display:block;color:var(--text);font-size:17px;margin-bottom:5px}.foot{color:#74829b;font-size:12px;margin-top:26px}.status{font-size:13px;color:#b4f1cf;margin-top:10px;min-height:18px}.count{color:#c8c0ff}.hidden{display:none!important}
+@media(max-width:950px){.layout{grid-template-columns:1fr}.sidebar{display:flex;gap:6px;overflow:auto;min-height:0;border-right:0;border-bottom:1px solid var(--line);padding:8px}.nav{white-space:nowrap;width:auto;margin:0}.side-label{display:none}.videos{grid-template-columns:repeat(2,minmax(0,1fr))}.top{padding:0 14px;gap:12px}.brand{font-size:20px}.top .create-label{display:none}}
+@media(max-width:560px){.main{padding:15px}.top{height:62px}.search input{padding:10px 12px}.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}.videos{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.panel{padding:15px}.stats{gap:7px}.stat{padding:11px}.stat strong{font-size:20px}.welcome h1{font-size:21px}.thumb{aspect-ratio:3/4}.video-info{padding:10px}.cardactions{flex-wrap:wrap}.cardactions button{min-width:40%}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span>▶</span> VidSphere</div><a href="#viewer" id="viewerNav" style="color:#c8c0ff;text-decoration:none;white-space:nowrap;font-size:13px">Viewer Page ↗</a>
+  <div class="search"><input id="search" type="search" placeholder="Search your videos…" aria-label="Search videos"></div>
+  <button id="topCreate"><span>＋</span> <span class="create-label">Create Post</span></button>
+</header>
+<div class="layout">
+  <aside class="sidebar">
+    <button class="nav active" data-view="all">⌂ &nbsp; Dashboard</button>
+    <button class="nav" data-view="all">▶ &nbsp; My Videos</button>
+    <button class="nav" data-view="scheduled">◷ &nbsp; Scheduled</button>
+    <button class="nav" data-view="drafts">▤ &nbsp; Drafts</button>
+    <div class="side-label">Workspace</div>
+    <button class="nav" id="exportBtn">⇩ &nbsp; Export Data</button>
+    <button class="nav" id="importBtn">⇧ &nbsp; Import Data</button>
+    <input id="importFile" type="file" accept="application/json" class="hidden">
+  </aside>
+  <main class="main">
+    <div class="welcome"><div><h1>Your video studio</h1><div class="muted">Upload, schedule, and manage up to 5 videos.</div></div><span class="count" id="capacity">0 / 5 videos</span></div>
+    <div class="stats">
+      <div class="stat"><strong id="totalStat">0</strong><span>Total videos</span></div>
+      <div class="stat"><strong id="scheduledStat">0</strong><span>Scheduled posts</span></div>
+      <div class="stat"><strong id="draftStat">0</strong><span>Drafts</span></div>
+    </div>
+    <section class="panel" id="composer">
+      <h2 id="formTitle">＋ Create a post</h2>
+      <form id="postForm">
+        <div class="formgrid">
+          <div class="field full"><label for="videoFile">Video file (MP4, WebM, MOV if browser supports it)</label><input id="videoFile" type="file" accept="video/*"><div class="hint">Maximum 5 posts in this demo. Large files are not uploaded to your hosting server by this standalone HTML.</div></div>
+          <div class="field"><label for="title">Video title</label><input id="title" maxlength="120" placeholder="Give your video a title" required></div>
+          <div class="field"><label for="visibility">Post status</label><select id="visibility"><option value="published">Published / show now</option><option value="scheduled">Scheduled</option><option value="draft">Save as draft</option></select></div>
+          <div class="field full"><label for="description">Caption / description</label><textarea id="description" maxlength="2000" placeholder="Write a caption…"></textarea></div>
+          <div class="field"><label for="postTime">Custom timestamp</label><input id="postTime" type="datetime-local" required><span class="hint">Choose the date and time you want displayed.</span></div>
+          <div class="field"><label for="videoUrl">Hosted video URL (optional)</label><input id="videoUrl" type="url" placeholder="https://your-domain.com/video.mp4"><span class="hint">Use this if your video is already hosted. Direct video URL is required for remote playback.</span></div>
+        </div>
+        <div class="formactions"><div><button type="button" class="ghost" id="resetBtn">Clear form</button> <button type="button" class="secondary" id="cancelEdit" hidden>Cancel edit</button></div><button class="primary" id="saveBtn" type="submit">Publish post</button></div>
+        <div class="status" id="status" role="status"></div>
+      </form>
+    </section>
+    <div class="sectionhead"><h2 id="listTitle">Your videos</h2><span class="muted" id="resultCount">0 posts</span></div>
+    <section class="videos" id="videoGrid"><div class="empty"><b>No videos yet</b>Upload a video or add a hosted video URL to get started.</div></section>
+    
+    <section id="viewerPage" class="hidden">
+      <style>#viewerPage :root{--bg:#070b12;--line:#27354a;--text:#edf2ff;--muted:#9aa8bf}#viewerPage *{box-sizing:border-box}#viewerPage{margin:0;background:radial-gradient(ellipse at 50% -15%,#182347 0,transparent 50%),var(--bg);color:var(--text);font:15px/1.5 system-ui,Arial,sans-serif}#viewerPage header{height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;border-bottom:1px solid var(--line);background:#080d16ef}#viewerPage .brand{font-size:24px;font-weight:800;text-decoration:none;color:var(--text)}#viewerPage .brand span{color:#9278ff}#viewerPage .search{width:min(360px,48vw);background:#151d2b;border:1px solid var(--line);border-radius:22px;color:var(--text);padding:10px 14px}#viewerPage .wrap{max-width:1080px;margin:32px auto;padding:0 18px}#viewerPage .muted{color:var(--muted)}#viewerPage .hidden{display:none!important}#viewerPage .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}#viewerPage .card{border:1px solid var(--line);background:#101827;border-radius:15px;overflow:hidden}#viewerPage .thumb{aspect-ratio:9/12;background:#111827}#viewerPage .thumb video{width:100%;height:100%;object-fit:contain;background:#000}#viewerPage .body{padding:15px}#viewerPage .body h2{margin:0 0 8px;overflow-wrap:anywhere}#viewerPage .desc{white-space:pre-wrap;overflow-wrap:anywhere;color:#bdc8dc}#viewerPage .timestamp{display:inline-block;margin-top:11px;background:#242044;color:#c8c0ff;border-radius:6px;padding:4px 8px;font-size:12px}#viewerPage .watch{display:block;margin-top:13px;background:linear-gradient(120deg,#6557ff,#8c5bff);color:white;text-align:center;padding:10px;border-radius:9px;font-weight:650;text-decoration:none}#viewerPage .single{max-width:760px;margin:auto}#viewerPage .single .thumb{aspect-ratio:16/9}#viewerPage .empty{border:1px dashed #35445d;border-radius:14px;padding:38px 20px;text-align:center;color:var(--muted);grid-column:1/-1}#viewerPage .foot{margin:25px 0;color:#74829b;font-size:12px}@media(max-width:760px){#viewerPage .grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:500px){#viewerPage header{padding:0 12px}#viewerPage .brand{font-size:20px}#viewerPage .grid{grid-template-columns:1fr}#viewerPage .card{display:grid;grid-template-columns:38% 1fr}#viewerPage .thumb{aspect-ratio:3/4}#viewerPage .body{padding:12px}}
+</style>
+      <header><a class="brand" href="viewer.html"><span>▶</span> VidSphere</a><input class="search" id="viewerSearch" placeholder="Search videos…" aria-label="Search videos"></header><main class="wrap"><h1 id="viewerPageTitle">Watch videos</h1><p class="muted" id="viewerSubtitle">Videos shared by the creator</p><section class="grid" id="viewerGrid"><div class="empty">Loading…</div></section><p class="foot">VidSphere Viewer · Shared videos need a public, directly playable video URL.</p></main>
+<script>(()=>{const $=id=>document.getElementById(id);function esc(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}function time(v){if(!v)return'Timestamp not set';const d=new Date(v);return isNaN(d)?v:d.toLocaleString([],{year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});}let p=null;try{const x=new URLSearchParams(location.search).get('post');if(x)p=JSON.parse(decodeURIComponent(escape(atob(x))));}catch(e){}if(p){$('pageTitle').textContent=p.title||'Shared video';$('subtitle').textContent='Shared video post';$('search').classList.add('hidden');$('grid').classList.add('single');$('grid').innerHTML=`<article class="card"><div class="thumb"><video controls playsinline preload="metadata" src="${esc(p.url||'')}"></video></div><div class="body"><h2>${esc(p.title||'Untitled video')}</h2><div class="desc">${esc(p.description||'')}</div><span class="timestamp">${esc(time(p.time))}</span><a class="watch" href="${esc(p.url||'#')}" target="_blank" rel="noopener">Open video ↗</a></div></article>`;}else{$('grid').innerHTML='<div class="empty"><b>Welcome to VidSphere</b>Open a creator’s share link to watch a video. A complete automatic feed needs a hosting API/database.</div>';}})();</script>
+    </section>
+
+    <p class="foot">VidSphere is a standalone front-end demo. Video files are held locally in this browser session; post details are saved in this browser's local storage. To publish videos for other visitors, connect this UI to your hosting/API and database.</p>
+  </main>
+</div>
+<script>
+(() => {
+  const MAX=5, KEY='vidsphere_posts_v1';
+  let posts=[], editingId=null, activeView='all', localUrls=new Map();
+  const $=id=>document.getElementById(id);
+  const els={form:$('postForm'),file:$('videoFile'),title:$('title'),description:$('description'),visibility:$('visibility'),time:$('postTime'),url:$('videoUrl'),status:$('status'),grid:$('videoGrid'),search:$('search')};
+  const nowLocal=()=>{const d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,16)};
+  els.time.value=nowLocal();
+  try{posts=JSON.parse(localStorage.getItem(KEY)||'[]');if(!Array.isArray(posts))posts=[];}catch{posts=[];}
+  function persist(){try{localStorage.setItem(KEY,JSON.stringify(posts.map(({id,title,description,status,time,url,createdAt})=>({id,title,description,status,time,url,createdAt}))));}catch(e){els.status.textContent='Browser storage is full. Use a hosted video URL or export your data.';}}
+  function escapeHtml(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+  function niceTime(v){if(!v)return 'Time not set';const d=new Date(v);return isNaN(d)?v:d.toLocaleString([], {year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});}
+  function stateLabel(p){if(p.status==='draft')return 'Draft';if(p.status==='scheduled')return new Date(p.time)>new Date()?'Scheduled':'Scheduled · time passed';return 'Published';}
+  function mediaFor(p){return localUrls.get(p.id)||p.url||'';}
+  function render(){
+    const q=els.search.value.trim().toLowerCase();
+    const shown=posts.filter(p=>(activeView==='all'||p.status===activeView)&&(!q||(p.title+' '+p.description).toLowerCase().includes(q)));
+    $('capacity').textContent=posts.length+' / '+MAX+' videos';
+    $('totalStat').textContent=posts.length;
+    $('scheduledStat').textContent=posts.filter(p=>p.status==='scheduled').length;
+    $('draftStat').textContent=posts.filter(p=>p.status==='draft').length;
+    $('resultCount').textContent=shown.length+' post'+(shown.length===1?'':'s');
+    $('listTitle').textContent=activeView==='scheduled'?'Scheduled posts':activeView==='drafts'?'Drafts':'Your videos';
+    if(!shown.length){els.grid.innerHTML='<div class="empty"><b>No matching videos</b>Try another search or create a new post.</div>';return;}
+    els.grid.innerHTML=shown.map(p=>{
+      const src=mediaFor(p), isVideo=!!src;
+      const media=isVideo?`<video controls preload="metadata" playsinline src="${escapeHtml(src)}"></video>`:`<div class="placeholder"><b>▶</b>Video preview<br><small>Add a video file or hosted URL</small></div>`;
+      return `<article class="video-card"><div class="thumb">${media}</div><div class="video-info"><h3>${escapeHtml(p.title)}</h3><div class="description">${escapeHtml(p.description||'No caption')}</div><span class="timestamp">${escapeHtml(niceTime(p.time))}</span><div class="meta">${escapeHtml(stateLabel(p))}${p.url?' · Hosted URL':''}</div><div class="cardactions"><button class="secondary" data-edit="${escapeHtml(p.id)}">Edit</button><button class="secondary" data-share="${escapeHtml(p.id)}">Share link</button><button class="danger" data-delete="${escapeHtml(p.id)}">Delete</button></div></div></article>`;
+    }).join('');
+  }
+  function resetForm(){editingId=null;els.form.reset();els.time.value=nowLocal();$('formTitle').textContent='＋ Create a post';$('saveBtn').textContent='Publish post';$('cancelEdit').hidden=true;els.status.textContent='';}
+  function editPost(id){const p=posts.find(x=>x.id===id);if(!p)return;editingId=id;els.title.value=p.title;els.description.value=p.description||'';els.visibility.value=p.status;els.time.value=p.time||nowLocal();els.url.value=p.url||'';els.file.value='';$('formTitle').textContent='✎ Edit post';$('saveBtn').textContent='Save changes';$('cancelEdit').hidden=false;els.status.textContent='Editing “'+p.title+'”. Choose a new video file to replace the current one.';$('composer').scrollIntoView({behavior:'smooth',block:'start'});}
+  els.form.addEventListener('submit',e=>{
+    e.preventDefault();
+    const file=els.file.files[0], url=els.url.value.trim();
+    if(!editingId&&posts.length>=MAX){els.status.textContent='You already have 5 posts. Delete one before adding another.';return;}
+    if(file&&!file.type.startsWith('video/')){els.status.textContent='Please choose a video file.';return;}
+    if(!editingId&&!file&&!url){els.status.textContent='Choose a video file or enter a hosted video URL.';return;}
+    if(url&&!/^https?:\/\//i.test(url)){els.status.textContent='Hosted video URL must start with http:// or https://';return;}
+    const old=editingId?posts.find(p=>p.id===editingId):null;
+    const p={id:editingId||('v_'+Date.now()+'_'+Math.random().toString(36).slice(2,7)),title:els.title.value.trim(),description:els.description.value.trim(),status:els.visibility.value,time:els.time.value,url:url||(old?old.url:''),createdAt:old?old.createdAt:new Date().toISOString()};
+    if(file){if(localUrls.has(p.id))URL.revokeObjectURL(localUrls.get(p.id));localUrls.set(p.id,URL.createObjectURL(file));p.localOnly=true;}
+    else if(old&&localUrls.has(p.id)){/* keep existing local file unless a new URL replaces it */if(url){URL.revokeObjectURL(localUrls.get(p.id));localUrls.delete(p.id);}}
+    if(old){posts=posts.map(x=>x.id===editingId?p:x);}else posts.unshift(p);
+    persist();render();resetForm();els.status.textContent='';window.scrollTo({top:0,behavior:'smooth'});
+  });
+  els.grid.addEventListener('click',e=>{
+    const eb=e.target.closest('[data-edit]'), db=e.target.closest('[data-delete]'), sb=e.target.closest('[data-share]');
+    if(eb)editPost(eb.dataset.edit);
+    if(sb){const p=posts.find(x=>x.id===sb.dataset.share);if(!p)return;if(!p.url){alert('Cross-device share links need a public hosted video URL. Edit this post and add the URL; local files only work in this browser.');return;}const payload={title:p.title,description:p.description||'',time:p.time||'',url:p.url,status:p.status||'published'};const target=new URL('viewer.html',window.location.href);target.searchParams.set('post',btoa(unescape(encodeURIComponent(JSON.stringify(payload)))));const link=target.href;if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(link).then(()=>alert('Viewer link copied!')).catch(()=>prompt('Copy this viewer link:',link));}else prompt('Copy this viewer link:',link);}
+    if(db){const p=posts.find(x=>x.id===db.dataset.delete);if(!p)return;if(!confirm('Delete “'+p.title+'”?'))return;if(localUrls.has(p.id)){URL.revokeObjectURL(localUrls.get(p.id));localUrls.delete(p.id);}posts=posts.filter(x=>x.id!==p.id);persist();render();if(editingId===p.id)resetForm();}
+  });
+  els.search.addEventListener('input',render);
+  document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>{activeView=b.dataset.view;document.querySelectorAll('[data-view]').forEach(n=>n.classList.toggle('active',n===b));render();}));
+  $('topCreate').addEventListener('click',()=>{$('composer').scrollIntoView({behavior:'smooth'});els.title.focus();});
+  $('resetBtn').addEventListener('click',resetForm);$('cancelEdit').addEventListener('click',resetForm);
+  $('exportBtn').addEventListener('click',()=>{const blob=new Blob([JSON.stringify(posts.map(({id,title,description,status,time,url,createdAt})=>({id,title,description,status,time,url,createdAt})),null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='vidsphere-posts.json';a.click();URL.revokeObjectURL(a.href);});
+  $('importBtn').addEventListener('click',()=>$('importFile').click());
+  $('importFile').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{const data=JSON.parse(await f.text());if(!Array.isArray(data))throw Error();if(data.length>MAX)throw Error('limit');posts=data.map(p=>({id:String(p.id||('v_'+Date.now()+Math.random())),title:String(p.title||'Untitled'),description:String(p.description||''),status:['published','scheduled','draft'].includes(p.status)?p.status:'draft',time:String(p.time||nowLocal()),url:String(p.url||''),createdAt:p.createdAt||new Date().toISOString()}));persist();render();els.status.textContent='Post data imported. Local video files must be selected again.';}catch(err){alert(err.message==='limit'?'Import file has more than 5 posts.':'Invalid JSON file.');}e.target.value='';});
+
+  const adminMain = document.querySelector('.main');
+  const adminSections = Array.from(adminMain.children).filter(el => el.id !== 'viewerPage' && !el.classList.contains('foot'));
+  const viewerPage = $('viewerPage');
+  function switchPage(toViewer) {
+    adminSections.forEach(el => el.classList.toggle('hidden', toViewer));
+    viewerPage.classList.toggle('hidden', !toViewer);
+    $('viewerNav').textContent = toViewer ? '← Admin Page' : 'Viewer Page ↗';
+    if(toViewer) {
+      const $v = id => document.getElementById('viewer'+id);
+      let p=null;
+      try { const x=new URLSearchParams(location.hash.slice(1)).get('post'); if(x)p=JSON.parse(decodeURIComponent(escape(atob(x)))); } catch(e) {}
+      if(p) {
+        $v('PageTitle').textContent=p.title||'Shared video';
+        $v('Subtitle').textContent='Shared video post';
+        $v('Search').classList.add('hidden');
+        $v('Grid').classList.add('single');
+        $v('Grid').innerHTML=`<article class="card"><div class="thumb"><video controls playsinline preload="metadata" src="${escapeHtml(p.url||'')}"></video></div><div class="body"><h2>${escapeHtml(p.title||'Untitled video')}</h2><div class="desc">${escapeHtml(p.description||'')}</div><span class="timestamp">${escapeHtml(niceTime(p.time))}</span><a class="watch" href="${escapeHtml(p.url||'#')}" target="_blank" rel="noopener">Open video ↗</a></div></article>`;
+      } else {
+        $v('Grid').innerHTML='<div class="empty"><b>Viewer page</b>Use the Share link button on a post to create a link to a hosted video.</div>';
+      }
+    }
+    history.replaceState(null,'',toViewer?'#viewer':' ');
+  }
+  $('viewerNav').addEventListener('click', e=>{e.preventDefault();switchPage(viewerPage.classList.contains('hidden'));});
+
+  render();
+})();
+</script>
+</body>
+</html>
